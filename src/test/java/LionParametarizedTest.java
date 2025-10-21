@@ -18,7 +18,7 @@ public class LionParametarizedTest {
     private Lion lion;
     private Feline felineMock;
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {"Самец", true},

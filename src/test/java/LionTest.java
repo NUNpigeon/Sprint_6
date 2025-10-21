@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 public class LionTest {
@@ -34,8 +35,14 @@ public class LionTest {
         assertEquals(expectedFood, lion.getFood());
     }
 
-    @Test(expected = Exception.class)
-    public void testInvalidLionSex() throws Exception {
-        new Lion("Неправильный пол", felineMock);
+    @Test
+    public void testInvalidLionSex() {
+        String expectedMessage = "Используйте допустимые значения пола животного - самец или самка";
+        try {
+            new Lion("Неправильный пол", felineMock);
+            fail("Ожидалось исключение, но оно не было выброшено.");
+        } catch (Exception e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
     }
 }
