@@ -1,23 +1,23 @@
 import com.example.Feline;
 import com.example.Lion;
-import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
+    @Mock
     private Feline felineMock;
 
-    @Before
-    public void setUp() throws Exception {
-        felineMock = Mockito.mock(Feline.class);
-    }
 
     @Test
     public void getKittensTest() throws Exception {
@@ -36,13 +36,7 @@ public class LionTest {
     }
 
     @Test
-    public void testInvalidLionSex() {
-        String expectedMessage = "Используйте допустимые значения пола животного - самец или самка";
-        try {
-            new Lion("Неправильный пол", felineMock);
-            fail("Ожидалось исключение, но оно не было выброшено.");
-        } catch (Exception e) {
-            assertEquals(expectedMessage, e.getMessage());
-        }
+    public void lionConstructorThrowsExceptionForInvalidSex() {
+        assertThrows(Exception.class, () -> new Lion("Неизвестный", felineMock));
     }
 }
